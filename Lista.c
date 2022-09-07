@@ -5,12 +5,13 @@
 #include <stdbool.h>
 
 typedef struct tElemento{
-    int *dato;
+    int dato;
     struct tElemento *siguiente;
 } tElemento;
 
 typedef struct Lista{
 	tElemento *inicio;
+	int tamanio;
 }  Lista;
 
 Lista *lista;
@@ -24,34 +25,48 @@ void mostrarLista();
 
 int main(){
 
+	lista = (Lista*)malloc(sizeof(Lista));
+	lista->inicio = NULL;
+	lista->tamanio = 0;
+
 	agregarAlPrincipio();
 	agregarAlFinal();
-	agregarLugarX(3);
+	agregarAlPrincipio();
+	agregarAlPrincipio();
+	agregarLugarX(2);
+
 	mostrarLista();
 
     return 0;
 }
 
 tElemento *crearElemento(){
+	
 	tElemento *Elemento = (tElemento*)malloc(sizeof(tElemento));
 	int dato;
 
 	printf("Ingrese un dato: \n > ");
 	scanf("%d", &dato);
 
-	Elemento->dato = &dato;
+	Elemento->dato = dato;
 	Elemento->siguiente = NULL;
 
+	lista->tamanio ++;
+
 	return Elemento;
+
 }
 
 void agregarAlPrincipio(){
+
 	tElemento *nuevoElemento = crearElemento();
 	nuevoElemento->siguiente = lista->inicio;
 	lista->inicio = nuevoElemento;
+
 }
 
 void agregarAlFinal(){
+	
 	tElemento *nuevoElemento = crearElemento();
 	
 	if(lista->inicio == NULL){
@@ -79,15 +94,19 @@ void agregarLugarX(int x){
 	int pos;
 
 	if(lista->inicio == NULL){
+
 		lista->inicio = nuevoElemento;
+
 	}else{
 
 		aux = lista->inicio;
-		pos = 0;
+		pos = 1;
 
-		while(pos < x && aux->siguiente != NULL){
+		while(pos < x -1){
+
 			aux = aux->siguiente;
 			pos++;
+
 		}
 
 		nuevoElemento->siguiente = aux->siguiente;
@@ -103,6 +122,7 @@ void mostrarLista(){
 
 	while(aux != NULL){
 		printf("%d\n", aux->dato);
+		aux = aux->siguiente;
 	}
 
 }
