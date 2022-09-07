@@ -7,7 +7,7 @@
 typedef struct tElemento{
     int dato;
     struct tElemento *siguiente;
-} tElemento;
+} tElemento;																																																																																		+											
 
 typedef struct Lista{
 	tElemento *inicio;
@@ -25,9 +25,7 @@ void mostrarLista();
 
 int main(){
 
-	lista = (Lista*)malloc(sizeof(Lista));
-	lista->inicio = NULL;
-	lista->tamanio = 0;
+	lista = NULL;
 
 	agregarAlPrincipio();
 	agregarAlFinal();
